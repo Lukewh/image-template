@@ -30,11 +30,7 @@ def image_template(url, alt, width, height, **attributes):
     if not url_parts.netloc:
         raise Exception("url must contain a hostname")
 
-    if not url_parts.netloc == "assets.ubuntu.com":
-        # If not assets server, resize image on cloudinary
-        cloudinary_options.append("w_" + str(width))
-        cloudinary_options.append("h_" + str(height))
-    elif url_parts.path[-4:] != ".svg":
+    if url_parts.path[-4:] != ".svg":
         # Use the assets server to resize the image (for non SVGs)
         # so we aren't caching more than we need in cloudinary
 
